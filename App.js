@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import { StyleSheet, Text, View ,FlatList,TouchableOpacity} from 'react-native';
 import Header from './components/header';
 import TodoIteam from './components/todoiteams';
+import AddTodo from './components/addTodo' 
 
 
 export default function App() {
@@ -13,8 +14,17 @@ export default function App() {
     );
 const pressHandler= (key) => {
   settodos((prevTodos) =>{
-    return prevTodos.filter(todo => todo.key !=key)
+    return prevTodos.filter(prevTodos => prevTodos.key !=key)
   });
+}
+
+const submitHandler = (text) =>{
+  settodos((previousTodos)=>{ 
+    return [
+      {text:text , key: Math.random().toString()}, ...previousTodos
+    ];
+  
+  })
 }
 
   return (
@@ -22,7 +32,7 @@ const pressHandler= (key) => {
       {/*header */}
       <Header/>
       <View  style ={styles.content} >
-       
+        <AddTodo submitHandler={submitHandler}/>
        
         {/*to form */} 
         <View  style ={styles.list} >
